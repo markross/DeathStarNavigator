@@ -45,4 +45,12 @@ class DroidSpec extends ObjectBehavior
         $this->getPosition()->shouldBe([3, 6]);
     }
 
+    function it_remembers_its_moves()
+    {
+        $this->move(Droid::DIR_RIGHT);
+        $this->move(Droid::DIR_LEFT);
+        $this->move(Droid::DIR_FORWARD);
+        $this->getMoves()->shouldBe('rlf');
+    }
+
 }

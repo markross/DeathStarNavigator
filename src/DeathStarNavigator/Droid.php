@@ -19,6 +19,7 @@ class Droid
      */
     private int $yPos;
 
+    private array $moves = [];
     /**
      * Droid constructor.
      * @param int $xPos
@@ -41,7 +42,7 @@ class Droid
     /**
      * @param string $direction Move the droid one place in the specified direction
      */
-    public function move(string $direction) : void
+    public function move(string $direction) : array
     {
         switch ($direction) {
             case self::DIR_FORWARD:
@@ -56,5 +57,13 @@ class Droid
             default:
                 throw new InvalidArgumentException('Invalid direction specified');
         }
+
+        $this->moves[] = $direction;
+        return [$this->xPos, $this->yPos];
+    }
+
+    public function getMoves()
+    {
+        return implode("", $this->moves);
     }
 }
