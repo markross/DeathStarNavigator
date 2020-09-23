@@ -1,0 +1,22 @@
+{
+    "name": "markross/death-star-navigator",
+    "require": {
+        "psr/http-client": "^1.0",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "DeathStarNavigator\\":"src/DeathStarNavigator",
+            "spec\\":"spec"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mark Ross",
+            "email": "mark@mross.co.uk"
+        }
+    ]
+}
