@@ -7,7 +7,7 @@ class DroidFactory
 {
     public function create(Path $path) : Sendable
     {
-        $navigator = new NavigationService(null, null, new Config('../../config.json'));
+        $navigator = new NavigationService();
         return new Droid($path, $navigator);
     }
 }

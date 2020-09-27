@@ -36,20 +36,20 @@ class PathFinder
         $droid = $this->droidFactory->create($path);
         $crashReport = $droid->send();
         $crashLocation = $crashReport->getCrashLocation();
-        var_dump($crashLocation);
 
         if ($crashReport->isLost()) {
             throw new DroidLostException('Droid has been lost. Did you configure the correct tunnel length?');
         }
 
         if ($crashReport->hasCrashed()) {
+            echo "\nCrashed at $crashLocation[0], $crashLocation[1]. Sending new Droid";
             $crashX = $crashLocation[0];
             $map = $crashReport->getMap();
             $nextMove = $this->findMovesToNearestHole($map, $crashLocation);
             $path->addMove($nextMove, $crashX);
-            //@todo what happens if the end is never found?
             $this->run($path);
         }
+
         return $path;
     }
 
