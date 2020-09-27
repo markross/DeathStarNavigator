@@ -42,57 +42,16 @@ EOF
         $this->getCrashLocation()->shouldBe([12,4]);
     }
 
-    function it_gets_the_next_left_move(ResponseInterface $response, StreamInterface $stream)
+    function it_gets_the_map_at_the_crash_location(ResponseInterface $response, StreamInterface $stream)
     {
         $response->getStatusCode()->willReturn(417);
         $response->getBody()->willReturn($stream);
-        $stream->getContents()->willReturn('
-{
-  "message": "Crashed at position 12,4.",
-  "map": "##  x ###\n##  *  ##\n##  *  ##\n##  * ###\n##  *  ##\n### *  ##\n### *   #\n####*   #\n### *   #\n### *  ##\n####*  ##\n### *####\n##  #####"
-}'
+        $stream->getContents()->willReturn(
+            '{"message":"Crashed at position 12,4.","map":"##  x ###\n##  *  ##\n##  *  ##\n##  * ###\n##  *  ##\n### *  ##\n### *   #\n##  #####"}'
         );
 
-        $this->getNextMove()->shouldBe('l');
-    }
-    function it_gets_the_next_right_move(ResponseInterface $response, StreamInterface $stream)
-    {
-        $response->getStatusCode()->willReturn(417);
-        $response->getBody()->willReturn($stream);
-        $stream->getContents()->willReturn('
-{
-  "message": "Crashed at position 12,1.",
-  "map": "##  x ###\n##  *  ##\n##  *  ##\n##  * ###\n##  *  ##\n### *  ##\n### *   #\n####*   #\n### *   #\n### *  ##\n####*  ##\n### *####\n##  #####"
-}'
-        );
-
-        $this->getNextMove()->shouldBe('r');
+        $this->getMap()->shouldBe(['#','#',' ',' ','#','#','#','#','#']);
     }
 
-    function it_finds_the_nearest_hole_to_the_left(ResponseInterface $response, StreamInterface $stream)
-    {
-        $response->getStatusCode()->willReturn(417);
-        $response->getBody()->willReturn($stream);
-        $stream->getContents()->willReturn('
-{
-  "message": "Crashed at position 12,4.",
-  "map": "##  x ###\n##  *  ##\n##  *  ##\n##  * ###\n##  *  ##\n### *  ##\n### *   #\n####*   #\n### *   #\n### *  ##\n####*  ##\n### *####\n##  #####"
-}'
-        );
-        $this->findNearestHole(['#','#',' ','#','#','#','#','#', '#'])->shouldBe(['l','l']);
-    }
-
-    function it_finds_the_nearest_hole_to_the_right(ResponseInterface $response, StreamInterface $stream)
-    {
-        $response->getStatusCode()->willReturn(417);
-        $response->getBody()->willReturn($stream);
-        $stream->getContents()->willReturn('
-{
-  "message": "Crashed at position 12,0.",
-  "map": "##  x ###\n##  *  ##\n##  *  ##\n##  * ###\n##  *  ##\n### *  ##\n### *   #\n####*   #\n### *   #\n### *  ##\n####*  ##\n### *####\n##  #####"
-}'
-        );
-        $this->findNearestHole(['#','#','#',' ','#','#','#','#', '#'])->shouldBe(['r','r','r']);
-    }
 }
 

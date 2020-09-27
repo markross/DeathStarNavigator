@@ -60,7 +60,7 @@ class PathFinder
      * @param array $crashLocation
      * @return array The list of moves to get to the hole
      */
-    public function findMovesToNearestHole(array $mapLine, array $crashLocation) : array
+    private function findMovesToNearestHole(array $mapLine, array $crashLocation) : array
     {
         $distanceToLeft = $this->findClosestHoleToLeft($crashLocation[1], $mapLine);
         $distanceToRight = $this->findClosestHoleToRight($crashLocation[1], $mapLine);
