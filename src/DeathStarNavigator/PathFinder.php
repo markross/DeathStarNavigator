@@ -38,6 +38,10 @@ class PathFinder
         $crashLocation = $crashReport->getCrashLocation();
         var_dump($crashLocation);
 
+        if ($crashReport->isLost()) {
+            throw new DroidLostException('Droid has been lost. Did you configure the correct tunnel length?');
+        }
+
         if ($crashReport->hasCrashed()) {
             $crashX = $crashLocation[0];
             $map = $crashReport->getMap();

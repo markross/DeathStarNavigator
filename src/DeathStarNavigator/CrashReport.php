@@ -16,19 +16,25 @@ class CrashReport implements CrashReportInterface
     /**
      * @var bool If a crash is being reported
      */
-    private bool $hasCrashed;
+    private bool $hasCrashed = false;
+    /**
+     * @var bool If the Droid is lost
+     */
+    private bool $isLost;
 
     /**
      * CrashReport constructor.
      * @param bool $hasCrashed
      * @param array $crashLocation
      * @param array $map
+     * @param bool $isLost
      */
-    public function __construct(bool $hasCrashed, array $crashLocation = [], array $map = [])
+    public function __construct(bool $hasCrashed, array $crashLocation = [], array $map = [], bool $isLost = false)
     {
         $this->hasCrashed = $hasCrashed;
         $this->crashLocation = $crashLocation;
         $this->map = $map;
+        $this->isLost = $isLost;
     }
 
     /**
@@ -54,4 +60,10 @@ class CrashReport implements CrashReportInterface
     {
         return $this->map;
     }
+
+    public function isLost() : bool
+    {
+        return $this->isLost;
+    }
+
 }

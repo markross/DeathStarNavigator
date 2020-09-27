@@ -4,10 +4,17 @@ namespace DeathStarNavigator;
 
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Parses a response from the API
+ *
+ * Class ResponseParser
+ * @package DeathStarNavigator
+ */
 class ResponseParser
 {
-    const STATUS_CRASHED = 417;
-    const STATUS_FOUND = 200;
+    const STATUS_LOST       = 410;
+    const STATUS_CRASHED    = 417;
+    const STATUS_FOUND      = 200;
     /**
      * @var ResponseInterface
      */
@@ -17,12 +24,12 @@ class ResponseParser
 
     private array $crashLocation = [];
 
-//    private array $nextMove = [];
     private bool $isFound = false;
-    /**
-     * @var mixed
-     */
-    private $body;
+
+    private bool $isLost = false;
+
+    private \stdClass $body;
+
     private array $map = [];
 
     public function __construct(ResponseInterface $response)
@@ -36,6 +43,7 @@ class ResponseParser
         $status = $this->response->getStatusCode();
         $this->isFound = $status === self::STATUS_FOUND;
         $this->isCrashed = $status === self::STATUS_CRASHED;
+        $this->isLost = $status === self::STATUS_LOST;
 
         if ($this->isCrashed) {
             $this->crashLocation = $this->parseCrashLocation();
@@ -56,15 +64,16 @@ class ResponseParser
         return $this->isFound;
     }
 
+    public function isLost() : bool
+    {
+        return $this->isLost;
+    }
+
     public function getCrashLocation() : array
     {
         return $this->crashLocation;
     }
 
-//    public function getNextMove() : array
-//    {
-//        return $this->nextMove;
-//    }
 
     private function parseCrashLocation()
     {

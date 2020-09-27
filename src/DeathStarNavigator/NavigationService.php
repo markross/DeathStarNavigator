@@ -52,7 +52,8 @@ class NavigationService implements NavigationInterface
         return new CrashReport(
             $parser->hasCrashed(),
             $parser->getCrashLocation(),
-            $parser->getMap()
+            $parser->getMap(),
+            $parser->isLost(),
         );
     }
 }
