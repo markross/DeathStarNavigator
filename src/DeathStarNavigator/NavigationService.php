@@ -9,6 +9,13 @@ use Nyholm\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 
+/**
+ * Class NavigationService
+ *
+ * Provides access to the navigation web service and sends back a crash report
+ *
+ * @package DeathStarNavigator
+ */
 class NavigationService implements NavigationInterface
 {
     /**
@@ -41,6 +48,13 @@ class NavigationService implements NavigationInterface
         $this->request = $request;
     }
 
+    /**
+     * Sends a path to the API and return the result as a CrashReport
+     *
+     * @param Path $path
+     * @return CrashReport
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
     public function navigate(Path $path) : CrashReport
     {
         $request = $this->request->withUri(

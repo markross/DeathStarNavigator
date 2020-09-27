@@ -11,8 +11,17 @@ class Config
      * @var Uri $uri
      */
     private Uri $uri;
+    /**
+     * @var int
+     */
     private int $tunnelLength;
+    /**
+     * @var string
+     */
     private string $name;
+    /**
+     * @var null|Config
+     */
     private static $instance = null;
 
     public function __construct()
@@ -32,17 +41,17 @@ class Config
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getTunnelLength()
+    public function getTunnelLength() : int
     {
         return $this->tunnelLength;
     }
