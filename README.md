@@ -12,6 +12,14 @@ Config is stored in config.json and has 3 settings. The defaults are provided an
 
 Note that it is assumed the length of the tunnel is known.
 
+## Running the app
+
+Run the app as follows:
+
+`php run.php`
+
+## Running the tests
+
 To run tests run:
 
 `./vendor/bin/phpspec run`
