@@ -57,13 +57,25 @@ class Path
      */
     public function addMove(array $moves, int $position) : void
     {
-        // check for left of right moves only
-        // @TODO - handle forward?
+        $this->validateMoves($moves);
+
         $this->moves[$position - 2] = [...$this->moves[$position - 2], ...$moves];
     }
 
     public function __toString() : string
     {
         return implode('', array_reduce($this->moves, 'array_merge', []));
+    }
+
+    /**
+     * @param array $moves
+     */
+    private function validateMoves(array $moves): void
+    {
+        array_map(function ($move) {
+            if ($move !== 'r' && $move !== 'l') {
+                throw new \InvalidArgumentException("Invalid move specified. Only 'l' or 'r' allowed");
+            }
+        }, $moves);
     }
 }

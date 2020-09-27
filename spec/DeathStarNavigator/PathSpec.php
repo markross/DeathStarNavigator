@@ -34,6 +34,11 @@ class PathSpec extends ObjectBehavior
         $this->getMoves()->shouldBeLike($expected);
     }
 
+    function it_throws_exception_if_invalid_move_added()
+    {
+        $this->shouldThrow('\InvalidArgumentException')->duringAddMove(['c'], 1);
+    }
+
     function it_can_be_cast_to_a_string()
     {
         $this->__toString()->shouldBe('fflffr');
