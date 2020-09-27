@@ -74,8 +74,7 @@ class ResponseParser
         return $this->crashLocation;
     }
 
-
-    private function parseCrashLocation()
+    private function parseCrashLocation() : array
     {
         $this->body = json_decode($this->response->getBody()->getContents());
         preg_match('/(\d{1,3}),(\d{1})/', $this->body->message, $matches);

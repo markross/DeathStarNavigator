@@ -1,10 +1,11 @@
 <?php
 
+use DeathStarNavigator\Config;
 use DeathStarNavigator\DroidFactory;
 use DeathStarNavigator\PathFinder;
 
 require './vendor/autoload.php';
-$config = \DeathStarNavigator\Config::get();
+$config = Config::get();
 $pathFinder = new PathFinder(new DroidFactory(), $config->getTunnelLength());
 try {
     $path = $pathFinder->run();

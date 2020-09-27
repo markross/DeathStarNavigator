@@ -6,11 +6,11 @@ namespace DeathStarNavigator;
 class CrashReport implements CrashReportInterface
 {
     /**
-     * @var array Coordinates of the crash location
+     * @var array<int> Coordinates of the crash location
      */
     private array $crashLocation;
     /**
-     * @var array The map of the last line of crash location
+     * @var array<string> The map of the last line of crash location
      */
     private array $map;
     /**
@@ -25,8 +25,8 @@ class CrashReport implements CrashReportInterface
     /**
      * CrashReport constructor.
      * @param bool $hasCrashed
-     * @param array $crashLocation
-     * @param array $map
+     * @param array<int> $crashLocation
+     * @param array<string> $map
      * @param bool $isLost
      */
     public function __construct(bool $hasCrashed, array $crashLocation = [], array $map = [], bool $isLost = false)
@@ -46,7 +46,7 @@ class CrashReport implements CrashReportInterface
     }
 
     /**
-     * @return array
+     * @return array<int>
      */
     public function getCrashLocation() : array
     {
@@ -54,7 +54,7 @@ class CrashReport implements CrashReportInterface
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
     public function getMap() : array
     {
@@ -65,5 +65,4 @@ class CrashReport implements CrashReportInterface
     {
         return $this->isLost;
     }
-
 }

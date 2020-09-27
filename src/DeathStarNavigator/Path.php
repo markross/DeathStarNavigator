@@ -8,6 +8,9 @@ class Path
     const DIRECTION_RIGHT = 'r';
     const DIRECTION_FORWARD = 'f';
 
+    /**
+     * @var array A list of moves
+     */
     private array $moves;
 
     /**
@@ -52,7 +55,7 @@ class Path
      * @param array $moves
      * @param int $position
      */
-    public function addMove(array $moves, int $position)
+    public function addMove(array $moves, int $position) : void
     {
         // check for left of right moves only
         // @TODO - handle forward?

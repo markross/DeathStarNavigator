@@ -10,13 +10,13 @@ class Config
     /**
      * @var Uri $uri
      */
-    private $uri;
-    private $tunnelLength;
+    private Uri $uri;
+    private int $tunnelLength;
+    private string $name;
     private static $instance = null;
 
     public function __construct()
     {
-        // @TODO error checking
         $config = json_decode(file_get_contents('./config.json'));
         $this->uri = new Uri($config->uri);
         $this->uri = $this->uri->withQuery(sprintf("name=%s", $config->name));
@@ -24,7 +24,7 @@ class Config
         $this->tunnelLength = $config->tunnel_length;
     }
     /**
-     * @return mixed
+     * @return Uri
      */
     public function getUri() : Uri
     {

@@ -11,6 +11,7 @@ namespace DeathStarNavigator;
  */
 class PathFinder
 {
+    const DROID_LOST_MESSAGE = 'Droid has been lost. Did you configure the correct tunnel length?';
     /**
      * @var DroidFactory
      */
@@ -22,7 +23,6 @@ class PathFinder
 
     public function __construct(DroidFactory $droidFactory, int $tunnelLength)
     {
-        // we know the tunnel length so we can start with most simple path
         $startingPath = new Path(array_fill(0, $tunnelLength, 'f'));
         $this->droidFactory = $droidFactory;
         $this->startingPath = $startingPath;
@@ -38,7 +38,7 @@ class PathFinder
         $crashLocation = $crashReport->getCrashLocation();
 
         if ($crashReport->isLost()) {
-            throw new DroidLostException('Droid has been lost. Did you configure the correct tunnel length?');
+            throw new DroidLostException(self::DROID_LOST_MESSAGE);
         }
 
         if ($crashReport->hasCrashed()) {
@@ -70,6 +70,8 @@ class PathFinder
         } elseif ($distanceToRight) {
             return array_fill(0, $distanceToRight, 'r');
         }
+
+        return [];
     }
 
     /**
